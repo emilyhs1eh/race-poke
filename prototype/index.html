@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#F8F9F6"><title>Race Poke — interactive prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;650;700;800&display=swap" rel="stylesheet">
+  <script src="vendor/tailwind.js"></script>
+  <style type="text/tailwindcss">@theme { --font-sans: 'Geist', sans-serif; --color-paper: #F8F9F6; --color-ink: #1D1F1B; --color-muted: #596052; --color-line: #E4E8DE; --color-lime: #CDF76F; --color-soft: #F0F7E5; --color-wash: #EEF1EA; }</style>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="vendor/lucide.js"></script><script defer src="app.js"></script>
+</head>
+<body class="bg-[#E9EDE5] text-ink font-sans antialiased">
+  <div class="demo-stage mx-auto flex min-h-dvh max-w-[1120px] items-center justify-center gap-16 p-6 max-[700px]:p-0">
+    <aside class="w-[300px] shrink-0 max-[700px]:hidden" aria-label="Prototype controls">
+      <p class="text-xs font-semibold tracking-[.16em] text-muted">RACE POKE / LIVE PROTOTYPE</p>
+      <h1 class="mt-6 text-[38px] leading-[1.12] tracking-[-.03em]">A little motion.<br>A lot less<br>date-checking.</h1>
+      <p class="mt-5 text-sm leading-6 text-muted">Try a Poke. Share a start line. Leave the dates to your running friend.</p>
+      <div class="my-8 space-y-4 border-y border-[#D3DACC] py-6 text-sm">
+        <label class="flex cursor-pointer items-center justify-between gap-4"><span>Reduce motion</span><input id="motion-setting" type="checkbox" class="h-5 w-5 accent-[#1D1F1B]"></label>
+        <button data-action="next-moment" class="demo-link flex min-h-11 w-full items-center justify-between text-left">Try the next race moment <i data-lucide="arrow-right" class="h-4 w-4"></i></button>
+        <button data-action="onboarding" class="demo-link flex min-h-11 w-full items-center justify-between text-left">Try onboarding <i data-lucide="arrow-right" class="h-4 w-4"></i></button>
+        <button data-action="reset" class="demo-link flex min-h-11 w-full items-center justify-between text-left">Reset this demo <i data-lucide="rotate-ccw" class="h-4 w-4"></i></button>
+      </div>
+      <p class="text-xs leading-5 text-muted">150–300ms transitions. Keyboard-friendly.<br>System reduced-motion preference respected.</p>
+      <p class="mt-4 text-xs leading-5 text-muted">Prototype only. Dates and friends are illustrative. Choices are saved on this device; no real reminders, race entries, or messages are sent automatically.</p>
+    </aside>
+    <div id="phone" class="relative isolate w-full max-w-[390px] overflow-hidden bg-paper min-[701px]:rounded-[28px] min-[701px]:border min-[701px]:border-[#D2D9CB] min-[701px]:shadow-xl">
+      <div id="shell" class="flex h-full flex-col">
+        <div id="screen" class="min-h-0 flex-1 overflow-y-auto overscroll-contain" tabindex="-1"><main id="view"></main></div>
+        <nav id="navigation" class="shrink-0 border-t border-line bg-paper px-4 pb-3 pt-2" aria-label="Main navigation"></nav>
+      </div>
+      <div id="overlay" class="pointer-events-none absolute inset-0 z-40" hidden>
+        <button id="scrim" class="absolute inset-0 h-full w-full bg-[#0C1714]/40" aria-label="Dismiss sheet" tabindex="-1"></button>
+        <section id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" class="absolute inset-x-0 bottom-0 max-h-[92%] overflow-y-auto overscroll-contain rounded-t-[24px] bg-paper px-5 pb-6 pt-3 shadow-xl" tabindex="-1"></section>
+      </div>
+      <div id="toast" role="status" aria-live="polite" aria-atomic="true" class="pointer-events-none absolute inset-x-4 bottom-[84px] z-50 flex items-center gap-3 rounded-xl bg-ink px-4 py-3 text-sm text-white" hidden></div>
+    </div>
+  </div>
+</body>
+</html>

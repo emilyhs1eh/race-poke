@@ -1,0 +1,54 @@
+:root { color-scheme: light; --fast: 160ms; --normal: 220ms; --sheet: 260ms; --ease: cubic-bezier(.22,1,.36,1); }
+* { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+button, a, input, summary { touch-action: manipulation; }
+button:not(:disabled), a, summary { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+button, a, summary { transition: background-color var(--fast) ease, color var(--fast) ease, border-color var(--fast) ease, transform var(--fast) var(--ease), opacity var(--fast) ease; }
+button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible, [tabindex="0"]:focus-visible { outline: 2px solid #557431; outline-offset: 4px; }
+button:active:not(:disabled), .tactile:active { transform: scale(.98); }
+#phone { height: min(880px, calc(100dvh - 48px)); min-height: 580px; }
+#screen { scrollbar-width: none; }
+#screen::-webkit-scrollbar { display: none; }
+#view { opacity: 1; transform: translateY(0); transition: opacity 140ms ease, transform 180ms var(--ease); }
+#view.leaving { opacity: 0; transform: translateY(-4px); }
+#view.arriving { animation: arrive 180ms var(--ease) both; }
+@keyframes arrive { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+#overlay[hidden], #toast[hidden] { display: none; }
+#overlay { pointer-events: auto; }
+#scrim { opacity: 0; transition: opacity var(--sheet) ease; }
+#sheet { transform: translateY(100%); transition: transform var(--sheet) var(--ease); }
+#sheet:focus { outline: none; }
+#overlay.open #scrim { opacity: 1; }
+#overlay.open #sheet { transform: translateY(0); }
+#sheet.switch-content { animation: arrive 180ms var(--ease); }
+#toast { opacity: 0; transform: translateY(8px); transition: opacity 180ms ease, transform 220ms var(--ease); }
+#toast.visible { opacity: 1; transform: translateY(0); }
+.reveal { opacity: 0; transform: translateY(5px); transition: opacity 220ms ease, transform 220ms var(--ease); }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+.race-row:hover { background: #EEF1EA; }
+.race-row:focus-visible { outline-offset: -2px; }
+.poke-button { transition: background-color 200ms ease, color 200ms ease, transform 160ms var(--ease); }
+.poke-button.just-poked { animation: settle 220ms var(--ease); }
+@keyframes settle { from { transform: scale(.98); } to { transform: scale(1); } }
+.just-poked .check-mark polyline, .just-poked .check-mark path { stroke-dasharray: 30; stroke-dashoffset: 30; animation: draw-check 220ms ease forwards; }
+@keyframes draw-check { to { stroke-dashoffset: 0; } }
+.timeline-track { transform-origin: left; animation: track-in 240ms var(--ease) both; }
+@keyframes track-in { from { transform: scaleX(.85); opacity: .35; } to { transform: scaleX(1); opacity: 1; } }
+.current-dot { box-shadow: 0 0 0 3px #F0F7E5; animation: dot-arrive 220ms ease both; }
+@keyframes dot-arrive { from { box-shadow: 0 0 0 0 #F0F7E5; } to { box-shadow: 0 0 0 3px #F0F7E5; } }
+.tab-indicator { transition: transform 200ms var(--ease); }
+.moment-change { animation: arrive 220ms var(--ease); }
+.choice { transition: background-color 160ms ease, border-color 160ms ease; }
+.choice:has(input:checked) { background-color: #F0F7E5; border-color: #9AAF83; }
+.choice input { accent-color: #1D1F1B; }
+#drag-handle { touch-action: none; }
+.demo-link:hover { color: #476B27; }
+summary { list-style: none; }
+summary::-webkit-details-marker { display: none; }
+details[open] .accordion-content { animation: arrive 180ms ease; }
+details[open] .chevron { transform: rotate(180deg); }
+.chevron { transition: transform 180ms ease; }
+@media (max-width: 700px) { #phone { max-width: 440px; height: 100dvh; min-height: 0; } .demo-stage { min-height: 100dvh; align-items: start; background: #F8F9F6; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } .reveal { opacity: 1; transform: none; } #view.leaving { transform: none; } }
+html[data-motion="reduce"] *, html[data-motion="reduce"] *::before, html[data-motion="reduce"] *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+html[data-motion="reduce"] .reveal { opacity: 1; transform: none; }
